@@ -1,0 +1,729 @@
+{
+  "openapi": "3.0.4",
+  "info": {
+    "title": "CMS Api's",
+    "description": "This set of CMS controllers provides APIs for managing the e-commerce content system. It includes endpoints to manage categories, coupons, staff, and products, allowing for creation, updating, retrieval, and deletion of CMS data. These APIs ensure secure and organized content management for the platform.",
+    "version": "v1"
+  },
+  "paths": {
+    "/api/v1/Category/category/add": {
+      "post": {
+        "tags": [
+          "Category"
+        ],
+        "summary": "use this end call to add the new category to the database",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddCategoryDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddCategoryDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddCategoryDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ObjectResponseBase"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ObjectResponseBase"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ObjectResponseBase"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/Category/category/get/all": {
+      "get": {
+        "tags": [
+          "Category"
+        ],
+        "summary": "use this end call to get all availalbe categories details",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CategoryResponseDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CategoryResponseDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CategoryResponseDto"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/Coupen/add/coupen": {
+      "post": {
+        "tags": [
+          "Coupen"
+        ],
+        "summary": "hit this end call to add the new coupen",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddCoupenDetailsDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddCoupenDetailsDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddCoupenDetailsDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ObjectResponseBase"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ObjectResponseBase"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ObjectResponseBase"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/Product/product/add": {
+      "post": {
+        "tags": [
+          "Product"
+        ],
+        "summary": "use this end call to add new procuct",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "required": [
+                  "ProductCategory",
+                  "ProductDescription",
+                  "ProductImage",
+                  "ProductName",
+                  "ProductPrice",
+                  "StockQuantity"
+                ],
+                "type": "object",
+                "properties": {
+                  "ProductName": {
+                    "type": "string",
+                    "description": "provide the name of the product"
+                  },
+                  "ProductDescription": {
+                    "type": "string",
+                    "description": "provide the descritpion for the product"
+                  },
+                  "ProductPrice": {
+                    "type": "number",
+                    "description": "provide the price for the product here",
+                    "format": "double"
+                  },
+                  "ProductDiscount": {
+                    "type": "number",
+                    "description": "provide the description for the product",
+                    "format": "double"
+                  },
+                  "StockQuantity": {
+                    "type": "integer",
+                    "description": "provide the available quantity of product",
+                    "format": "int32"
+                  },
+                  "ProductImage": {
+                    "type": "string",
+                    "description": "provide the image of the product",
+                    "format": "binary"
+                  },
+                  "ProductCategory": {
+                    "type": "string",
+                    "description": "provide the product category name"
+                  }
+                }
+              },
+              "encoding": {
+                "ProductName": {
+                  "style": "form"
+                },
+                "ProductDescription": {
+                  "style": "form"
+                },
+                "ProductPrice": {
+                  "style": "form"
+                },
+                "ProductDiscount": {
+                  "style": "form"
+                },
+                "StockQuantity": {
+                  "style": "form"
+                },
+                "ProductImage": {
+                  "style": "form"
+                },
+                "ProductCategory": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ObjectResponseBase"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ObjectResponseBase"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ObjectResponseBase"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/Product/product/get/all": {
+      "get": {
+        "tags": [
+          "Product"
+        ],
+        "summary": "use this end call to get all the product details",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductResponseDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AddCategoryDto": {
+        "required": [
+          "categoryUrl",
+          "description",
+          "displayHome",
+          "displayOrder",
+          "metaDesc",
+          "name",
+          "title"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "minLength": 1,
+            "type": "string",
+            "description": "provide the name of the category here"
+          },
+          "displayHome": {
+            "type": "boolean",
+            "description": "do you want to display it on home screen"
+          },
+          "categoryUrl": {
+            "minLength": 1,
+            "type": "string",
+            "description": "provide the category url here"
+          },
+          "title": {
+            "minLength": 1,
+            "type": "string",
+            "description": "provide the title for the category"
+          },
+          "description": {
+            "minLength": 1,
+            "type": "string",
+            "description": "provide the description for the category"
+          },
+          "metaDesc": {
+            "minLength": 1,
+            "type": "string",
+            "description": "provide the meta description for the category"
+          },
+          "displayOrder": {
+            "type": "integer",
+            "description": "provide the display order details here",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AddCoupenDetailsDTO": {
+        "required": [
+          "coupenCode",
+          "coupenStaus",
+          "coupenType",
+          "coupenValue",
+          "expiryDate"
+        ],
+        "type": "object",
+        "properties": {
+          "coupenType": {
+            "minLength": 1,
+            "type": "string",
+            "description": "please provide the type of coupen here"
+          },
+          "coupenCode": {
+            "minLength": 1,
+            "type": "string",
+            "description": "this property is for the coupen code "
+          },
+          "coupenValue": {
+            "minLength": 1,
+            "type": "string",
+            "description": "this property is for the coupen value "
+          },
+          "coupenStaus": {
+            "$ref": "#/components/schemas/CoupenStatus"
+          },
+          "expiryDate": {
+            "type": "string",
+            "description": "this property is for the coupen Expiry date ",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CategoryResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "categoryName": {
+            "type": "string",
+            "nullable": true
+          },
+          "isDisplayHome": {
+            "type": "boolean"
+          },
+          "catImageUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "catUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "catPageTitle": {
+            "type": "string",
+            "nullable": true
+          },
+          "catDescription": {
+            "type": "string",
+            "nullable": true
+          },
+          "catMetaDescription": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CoupenStatus": {
+        "enum": [
+          "Active",
+          "Expired",
+          "Used",
+          "Inactive"
+        ],
+        "type": "string"
+      },
+      "ObjectResponseBase": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProblemDetails": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "detail": {
+            "type": "string",
+            "nullable": true
+          },
+          "instance": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": { }
+      },
+      "ProductResponseDto": {
+        "type": "object",
+        "properties": {
+          "productId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "productName": {
+            "type": "string",
+            "nullable": true
+          },
+          "productCreatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "productUpdatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "productImageUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "productAddedIp": {
+            "type": "string",
+            "nullable": true
+          },
+          "productCategoryName": {
+            "type": "string",
+            "nullable": true
+          },
+          "productDescription": {
+            "type": "string",
+            "nullable": true
+          },
+          "productPrice": {
+            "type": "number",
+            "format": "double"
+          },
+          "productDiscount": {
+            "type": "number",
+            "format": "double"
+          },
+          "productStockQuantity": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "productAddedBy": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "http",
+        "description": "jwt authorization using the bearer scheme",
+        "scheme": "Bearer"
+      },
+      "GuestId": {
+        "type": "apiKey",
+        "description": "Optional guest id for the anonymous user",
+        "name": "GuestId",
+        "in": "header"
+      }
+    }
+  },
+  "security": [
+    {
+      "Bearer": [ ]
+    }
+  ]
+}
