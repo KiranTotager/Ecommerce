@@ -471,6 +471,44 @@
   },
   {
     "ContainingType": "ECommerce.Controllers.ProductController",
+    "Method": "GetAllProductsForCustomerAsync",
+    "RelativePath": "api/v1/Product/customer/product/get/all",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "ECommerce.DTOs.CustomerDTOs.CustomerProductResponseDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 403
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 401
+      }
+    ]
+  },
+  {
+    "ContainingType": "ECommerce.Controllers.ProductController",
     "Method": "AddProductAsync",
     "RelativePath": "api/v1/Product/product/add",
     "HttpMethod": "POST",

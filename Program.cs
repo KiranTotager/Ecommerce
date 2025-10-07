@@ -134,12 +134,13 @@ builder.Services.AddScoped<ICartItemRepository, CartItemRepository>();
 builder.Services.AddScoped<ICartItemService,CartItemService>();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<ICoupenDetailRepository,CoupenDetailRepository>();
-builder.Services.AddScoped<IUserConextService, UserContextService>();
+builder.Services.AddScoped<IUserContextService, UserContextService>();
 builder.Services.AddScoped<IGuestRepository,GuestRepository>();
 builder.Services.AddScoped<IWishListRepository, WishListRepository>();
 builder.Services.AddScoped<IWishListService, WishListService>();
 builder.Services.AddScoped<IContactUsRepository, ContactUsRepository>();
 builder.Services.AddScoped<IContactUsService, ContactUsService>();
+builder.Services.AddScoped<ICustomerProductService, CustomerProductService>();
 builder.Services.AddAuthentication(
     options =>
     {

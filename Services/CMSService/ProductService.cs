@@ -10,10 +10,10 @@ namespace ECommerce.Services.CMSService
     public class ProductService : IProductService
     {
         private readonly IProductRepository _prodcutRepository;
-        private readonly IUserConextService _userConextService;
+        private readonly IUserContextService _userConextService;
         private readonly ICategoryRepository _categoryRepository;
         private readonly IStaffRepository _staffRepository;
-        public ProductService(IProductRepository productRepository,IUserConextService userConextService, ICategoryRepository categoryRepository, IStaffRepository staffRepository)
+        public ProductService(IProductRepository productRepository,IUserContextService userConextService, ICategoryRepository categoryRepository, IStaffRepository staffRepository)
         {
             _prodcutRepository = productRepository;
             _userConextService = userConextService;

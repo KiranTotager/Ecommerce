@@ -28,9 +28,9 @@ namespace ECommerce.Services
         private readonly IMailService _mailService;
         private readonly ICartItemRepository _cartItemRepository;
         private readonly RoleManager<IdentityRole> _roleManager;
-        private readonly IUserConextService _userConextService;
+        private readonly IUserContextService _userConextService;
 
-        public AuthService(ITokenService jwtService, UserManager<ApplicationUser> userManager,IRefreshTokenRepository refreshTokenRepository, IHttpContextAccessor httpContextAccessor, ILogger<AuthService> logger, IConfiguration configuration, ICustomerRepository customerRepository, IMailService mailService, IStaffRepository staffRepository, RoleManager<IdentityRole> roleManager, ICartItemRepository cartItemRepository, IUserConextService userConextService)
+        public AuthService(ITokenService jwtService, UserManager<ApplicationUser> userManager,IRefreshTokenRepository refreshTokenRepository, IHttpContextAccessor httpContextAccessor, ILogger<AuthService> logger, IConfiguration configuration, ICustomerRepository customerRepository, IMailService mailService, IStaffRepository staffRepository, RoleManager<IdentityRole> roleManager, ICartItemRepository cartItemRepository, IUserContextService userConextService)
         {
             _tokenService = jwtService;
             _userManager = userManager;

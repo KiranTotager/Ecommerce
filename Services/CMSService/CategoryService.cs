@@ -11,9 +11,9 @@ namespace ECommerce.Services.CMSService
     {
         private readonly ICategoryRepository _repository;
         private readonly ILogger<CategoryService> _logger;
-        private readonly IUserConextService _userConextService;
+        private readonly IUserContextService _userConextService;
         private readonly IStaffRepository _staffRepository;
-        public CategoryService(ICategoryRepository repository,ILogger<CategoryService> logger,IUserConextService userConextService,IStaffRepository staffRepository)
+        public CategoryService(ICategoryRepository repository,ILogger<CategoryService> logger,IUserContextService userConextService,IStaffRepository staffRepository)
         {
             _repository = repository;
             _logger = logger;

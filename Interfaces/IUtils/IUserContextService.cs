@@ -2,7 +2,7 @@
 
 namespace ECommerce.Interfaces.IUtils
 {
-    public interface IUserConextService
+    public interface IUserContextService
     {
         public string? CustomerId { get; }
         public string? GuestId { get; }

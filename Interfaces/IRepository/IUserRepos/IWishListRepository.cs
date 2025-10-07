@@ -11,5 +11,8 @@ namespace ECommerce.Interfaces.IRepository.IUserRepos
         public Task DeleteAsync(long Id);
         public Task<IEnumerable<WishList>> GetByCustomerIdAsync(Guid CId);
         public Task<IEnumerable<WishList>> GetByGuestIdAsync(Guid GId);
+        public Task<WishList> GetWishListByGuestIdAndProductIDAsync(Guid GuestId, Guid ProductId);
+        public Task<WishList> GetWishListByCustomerIdAndProductIDAsync(Guid CusotmerId, Guid ProductId);
+
     }
 }

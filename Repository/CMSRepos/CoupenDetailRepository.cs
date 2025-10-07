@@ -49,9 +49,14 @@ namespace ECommerce.Repository.CMSRepos
             }
         }
 
-        public async Task<CoupenDetail> FindByCCode(string CCode)
+        public async Task<CoupenDetail> FindByCCodeAsync(string CCode)
         {
            return await _context.CoupenDetails.FirstOrDefaultAsync(CPN=>CPN.CCode==CCode);
+        }
+
+        public async Task<IEnumerable<CoupenDetail>> GetActiveCoupensAsync()
+        {
+            return await _context.CoupenDetails.Where(CpnDtl=>CpnDtl.Status==Enums.CoupenStatus.Active).ToListAsync();
         }
 
         public async Task<IEnumerable<CoupenDetail>> GetAllAsync()

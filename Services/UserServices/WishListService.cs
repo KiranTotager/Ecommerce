@@ -13,13 +13,13 @@ namespace ECommerce.Services.UserServices
     public class WishListService : IWishListService
     {
         private readonly IWishListRepository _repository;
-        private readonly IUserConextService _userConextService;
+        private readonly IUserContextService _userConextService;
         private readonly ICustomerRepository _customerRepository;
         private readonly IGuestRepository _guestRepository;
         private readonly IProductRepository _productRepository;
         private readonly ILogger<WishListService> _logger;
         private readonly IHttpContextAccessor _httpContextAccessor;
-        public WishListService(IWishListRepository repository, IUserConextService userConextService, ICustomerRepository customerRepository, IGuestRepository guestRepository,IProductRepository productRepository,ILogger<WishListService> logger,IHttpContextAccessor httpContextAccessor)
+        public WishListService(IWishListRepository repository, IUserContextService userConextService, ICustomerRepository customerRepository, IGuestRepository guestRepository,IProductRepository productRepository,ILogger<WishListService> logger,IHttpContextAccessor httpContextAccessor)
         {
             _repository = repository;
             _userConextService = userConextService;
@@ -40,6 +40,11 @@ namespace ECommerce.Services.UserServices
                 Guid CustmorId=_userConextService.GetUserId();
                 Product DbProduct = await _productRepository.GetByIdAsync(addWishListDto.ProductId);
                 Customer AppCustomer =await _customerRepository.GetByIdAsync(CustmorId);
+                WishList CustomerWishList=await _repository.GetWishListByCustomerIdAndProductIDAsync(CustmorId,DbProduct.ProductId);
+                if (CustomerWishList != null)
+                {
+                    return;
+                }
                 WishList NewWishList = new WishList
                 {
                     ProductsId=addWishListDto.ProductId,
@@ -62,6 +67,11 @@ namespace ECommerce.Services.UserServices
                     _logger.LogInformation($"guest is with the id {GuestID} not exist ,creating new one");
                     Guest NewGuest = new Guest();
                     GuestID = NewGuest.Id;
+                }
+                WishList GuestWishList=await _repository.GetWishListByGuestIdAndProductIDAsync(GuestID,DbProduct.ProductId);
+                if (GuestWishList != null)
+                {
+                    return;
                 }
                 WishList NewWishList = new WishList
                 {

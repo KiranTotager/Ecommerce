@@ -4,7 +4,7 @@ using System.Security.Claims;
 
 namespace ECommerce.Utils
 {
-    public class UserContextService : IUserConextService
+    public class UserContextService : IUserContextService
     {
         private readonly IHttpContextAccessor _httpcontextAccessor;
         public UserContextService(IHttpContextAccessor httpcontextAccessor)

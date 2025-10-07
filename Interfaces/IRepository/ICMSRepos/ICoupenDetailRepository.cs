@@ -9,6 +9,7 @@ namespace ECommerce.Interfaces.IRepository.ICMSRepos
         public Task<IEnumerable<CoupenDetail>> GetAllAsync();
         public Task UpdateAsync(CoupenDetail Coupen);
         public Task DeleteByIdAsync(int Id);
-        public Task<CoupenDetail> FindByCCode(string CCode);
+        public Task<CoupenDetail> FindByCCodeAsync(string CCode);
+        public Task<IEnumerable<CoupenDetail>> GetActiveCoupensAsync();
     }
 }

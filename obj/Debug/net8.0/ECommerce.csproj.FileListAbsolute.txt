@@ -183,3 +183,4 @@ C:\Users\tskir\source\repos\ECommerce\obj\Debug\net8.0\ECommerce.genruntimeconfi
 C:\Users\tskir\source\repos\ECommerce\obj\Debug\net8.0\ref\ECommerce.dll
 C:\Users\tskir\source\repos\ECommerce\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\tskir\source\repos\ECommerce\bin\Debug\net8.0\ECommerce.staticwebassets.runtime.json
+C:\Users\tskir\source\repos\ECommerce\obj\Debug\net8.0\ECommerce.sourcelink.json

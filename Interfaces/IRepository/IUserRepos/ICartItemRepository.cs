@@ -11,5 +11,7 @@ namespace ECommerce.Interfaces.IRepository.IUserRepos
         public Task DeleteByIdAsync(long Id);
         public Task<IEnumerable<CartItem>> GetByCustomerIdAsync(Guid customerId);
         public Task<IEnumerable<CartItem>> GetByGuestIdAsync(Guid guestId);
+        public Task<CartItem> GetCartItemByProductIdAndCustomerIdAsync(Guid ProductId, Guid CustomerId);
+        public Task<CartItem> GetCartItemByProductIdAndGuestIdAsync(Guid ProductId,Guid GuestId);
     }
 }

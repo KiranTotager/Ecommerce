@@ -12,13 +12,13 @@ namespace ECommerce.Services.UserServices
     public class CartItemService : ICartItemService
     {
         private readonly ICartItemRepository _cartItemRepository;
-        private readonly IUserConextService _userConextService;
+        private readonly IUserContextService _userConextService;
         private readonly IHttpContextAccessor _contextAccessor;
         private readonly ICustomerRepository _customerRepository;
         private readonly IProductRepository _productRespository;
         private readonly IGuestRepository _guestRespository;
         private readonly ILogger<CartItemService> _logger;
-        public CartItemService(ICartItemRepository cartItemRepository, IUserConextService userConextService, IHttpContextAccessor contextAccessor,ICustomerRepository customerRepository,IProductRepository productRepository,IGuestRepository guestRepository,ILogger<CartItemService> logger)
+        public CartItemService(ICartItemRepository cartItemRepository, IUserContextService userConextService, IHttpContextAccessor contextAccessor,ICustomerRepository customerRepository,IProductRepository productRepository,IGuestRepository guestRepository,ILogger<CartItemService> logger)
         {
             _cartItemRepository = cartItemRepository;
             _userConextService = userConextService;
@@ -43,6 +43,13 @@ namespace ECommerce.Services.UserServices
                     throw new SecurityTokenException("token is invalid");
                 }
                 Customer CurrentCustomer=await _customerRepository.GetByIdAsync(CustomerId);
+                CartItem UserCartItem=await _cartItemRepository.GetCartItemByProductIdAndCustomerIdAsync(addCartDTO.ProductId, CurrentCustomer.Id);
+                if (UserCartItem != null)
+                {
+                    UserCartItem.Quantity+=Convert.ToInt32(addCartDTO.Quantity);
+                    await _cartItemRepository.UpdateAsync(UserCartItem);
+                    return;
+                }
                 Product CartProduct=await _productRespository.GetByIdAsync(addCartDTO.ProductId);
                 CartItem NewCartItem = new CartItem
                 {
@@ -78,6 +85,13 @@ namespace ECommerce.Services.UserServices
                     );
                 }
                 Product CartProduct = await _productRespository.GetByIdAsync(addCartDTO.ProductId);
+                CartItem GuestCartItem=await _cartItemRepository.GetCartItemByProductIdAndGuestIdAsync(CartProduct.ProductId, guestId);
+                if (GuestCartItem != null)
+                {
+                    GuestCartItem.Quantity += Convert.ToInt32(addCartDTO.Quantity);
+                    await _cartItemRepository.UpdateAsync(GuestCartItem);
+                    return;
+                }
                 CartItem NewCartItem = new CartItem
                 {
                     Quantity = addCartDTO.Quantity,

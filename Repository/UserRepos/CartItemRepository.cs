@@ -54,6 +54,17 @@ namespace ECommerce.Repository.UserRepos
             }
         }
 
+
+        public async Task<CartItem> GetCartItemByProductIdAndCustomerIdAsync(Guid ProductId, Guid CustomerId)
+        {
+            return await _context.CartItems.FirstOrDefaultAsync(CrtItm => CrtItm.CustomerId == CustomerId && CrtItm.ProductId == ProductId);
+        }
+
+        public async Task<CartItem> GetCartItemByProductIdAndGuestIdAsync(Guid ProductId, Guid GuestId)
+        {
+            return await _context.CartItems.FirstOrDefaultAsync(CrtItm => CrtItm.ProductId == ProductId && CrtItm.GuestId == GuestId);
+        }
+
         public async Task<IEnumerable<CartItem>> GetAllAsync()
         {
             try

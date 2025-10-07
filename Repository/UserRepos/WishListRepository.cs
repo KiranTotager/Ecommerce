@@ -118,6 +118,16 @@ namespace ECommerce.Repository.UserRepos
             }
         }
 
+        public async Task<WishList> GetWishListByCustomerIdAndProductIDAsync(Guid CustomerId, Guid ProductId)
+        {
+            return await _context.WishLists.FirstOrDefaultAsync(WL => WL.GuestId == CustomerId && WL.ProductsId == ProductId);
+        }
+
+        public async Task<WishList> GetWishListByGuestIdAndProductIDAsync(Guid GuestId, Guid ProductId)
+        {
+            return await _context.WishLists.FirstOrDefaultAsync(WL => WL.GuestId == GuestId && WL.ProductsId == ProductId);
+        }
+
         public async Task UpdateAsync(WishList WList)
         {
             try
