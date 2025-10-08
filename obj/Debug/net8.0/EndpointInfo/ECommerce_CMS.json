@@ -263,6 +263,85 @@
         }
       }
     },
+    "/api/v1/Coupen/get/cms/coupens": {
+      "get": {
+        "tags": [
+          "Coupen"
+        ],
+        "summary": "hit this end call to get the all available coupens",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CMSCoupenResponseDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CMSCoupenResponseDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CMSCoupenResponseDto"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/Product/product/add": {
       "post": {
         "tags": [
@@ -560,6 +639,31 @@
           "expiryDate": {
             "type": "string",
             "description": "this property is for the coupen Expiry date ",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CMSCoupenResponseDto": {
+        "type": "object",
+        "properties": {
+          "coupenType": {
+            "type": "string",
+            "nullable": true
+          },
+          "coupenCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "coupenValue": {
+            "type": "string",
+            "nullable": true
+          },
+          "coupenStatus": {
+            "$ref": "#/components/schemas/CoupenStatus"
+          },
+          "coupenExpiryDate": {
+            "type": "string",
             "format": "date-time"
           }
         },

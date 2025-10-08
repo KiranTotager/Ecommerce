@@ -42,7 +42,7 @@ namespace ECommerce.Controllers
 
         [HttpGet("get/customer/coupens")]
         [ApiExplorerSettings(GroupName ="Customer")]
-        [SwaggerOperation("hit this end call to get the available active cupens")]
+        [SwaggerOperation("hit this end call to get the available active coupens")]
         public async Task<ActionResult<IEnumerable<CustomerCoupenDetailsResponseDto>>> CustomerGetAllCoupensAsync()
         {
             return Ok(await _coupenService.CustomerGetAllACtiveCoupensAsync());

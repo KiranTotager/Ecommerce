@@ -20,5 +20,9 @@ namespace ECommerce.DTOs.CustomerDTOs
         public string ProductImageUrl { get; set; }
         [SwaggerSchema("cateogry of the product")]
         public string ProductCategory { get; set; }
+        [SwaggerSchema("total sum of the perticular items in cart")]
+        public decimal ItemsTotalPrice { get; set; }
+        [SwaggerSchema]
+        public decimal GrandSum { get; set; }
     }
 }

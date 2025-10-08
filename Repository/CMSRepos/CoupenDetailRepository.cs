@@ -56,7 +56,7 @@ namespace ECommerce.Repository.CMSRepos
 
         public async Task<IEnumerable<CoupenDetail>> GetActiveCoupensAsync()
         {
-            return await _context.CoupenDetails.Where(CpnDtl=>CpnDtl.Status==Enums.CoupenStatus.Active).ToListAsync();
+            return await _context.CoupenDetails.Where(CpnDtl=>CpnDtl.Status==Enums.CoupenStatus.Active && CpnDtl.ExpiryDate<DateTime.Now).ToListAsync();
         }
 
         public async Task<IEnumerable<CoupenDetail>> GetAllAsync()
