@@ -696,6 +696,26 @@
     ]
   },
   {
+    "ContainingType": "ECommerce.Controllers.ProductOfferController",
+    "Method": "sendOffersToAllUsers",
+    "RelativePath": "api/v1/ProductOffer/send/offers/all",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "ECommerce.DTO.ResponseBase\u00601[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "ECommerce.Controllers.RoleController",
     "Method": "AddRoleAsync",
     "RelativePath": "api/v1/Role/add/role",

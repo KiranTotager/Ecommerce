@@ -2,6 +2,7 @@
 using ECommerce.DTOs.Auth;
 using ECommerce.Enums;
 using ECommerce.Interfaces.IServices;
+using ECommerce.Interfaces.IUtils;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
@@ -21,15 +22,19 @@ namespace ECommerce.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IAuthService _authService;
-        public AuthController(IAuthService authService) {
+        private readonly ILogger<AuthController> _logger;
+        private readonly IUserContextService _userContextService;
+        public AuthController(IAuthService authService,ILogger<AuthController> logger,IUserContextService userContextService) {
             _authService = authService;
+            _logger = logger;
+            _userContextService = userContextService;
         }
         [HttpPost("login")]
         [SwaggerOperation("this end call use for the login of user")]
         [SwaggerResponse(statusCode:StatusCodes.Status200OK,Type =typeof(ResponseBase<Object>),Description ="this end call will generate the response which contains the success message and status code")]
         public async Task<ActionResult<AuthResponseDto>> LoginAsync(LoginRequestDto loginRequest)
         {
-
+            _logger.LogInformation("user is trying to login from {UserIP}", _userContextService.GetUserIp());
             return (loginRequest.LMethod == LoginMethod.Password ? Ok(await _authService.LoginAsync(loginRequest)) : Ok(await _authService.LoginWithOtpAsync(loginRequest)));
         }
 

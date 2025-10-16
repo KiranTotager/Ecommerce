@@ -1,4 +1,5 @@
 using ECommerce.Data;
+using ECommerce.Hubs;
 using ECommerce.Interfaces.IRepository;
 using ECommerce.Interfaces.IRepository.ICMSRepos;
 using ECommerce.Interfaces.IRepository.IUserRepos;
@@ -20,10 +21,16 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Serilog;
 using System.Text;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
+//serilog configuration here
+builder.Host.UseSerilog((Context, Configuration) =>
+{
+    Configuration.ReadFrom.Configuration(Context.Configuration);
+});
 
 // Add services to the container.
 
@@ -179,8 +186,18 @@ builder.Services.AddAuthorization(
         });
     }
     );
-
+builder.Services.AddSignalR();
+builder.Services.AddHostedService<LogCleanupService>();
+builder.Services.AddCors(
+    options =>
+    {
+        options.AddPolicy("AllowAll", policy =>
+        {
+            policy.AllowAnyHeader().AllowAnyMethod().AllowCredentials().SetIsOriginAllowed((host) => true);
+        });
+    });
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -199,12 +216,19 @@ if (app.Environment.IsDevelopment())
         );
 
 }
+app.UseCors("AllowAll");
 app.UseExceptionHandlerMiddleware();
 app.UseHttpsRedirection();
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseStaticFiles();
+//app.UseEndpoints(endpoints =>
+//{
+//    endpoints.MapControllers();
+//    endpoints.MapHub<MessageHubClient>("/hubs/offeres");
+//});
+app.MapHub<MessageHubClient>("/hubs/offers");
 app.MapControllers();
 
 app.Run();

@@ -555,6 +555,36 @@
           }
         }
       }
+    },
+    "/api/v1/ProductOffer/send/offers/all": {
+      "get": {
+        "tags": [
+          "ProductOffer"
+        ],
+        "summary": "use this end call to send offers to all connected users",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ObjectResponseBase"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ObjectResponseBase"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ObjectResponseBase"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
