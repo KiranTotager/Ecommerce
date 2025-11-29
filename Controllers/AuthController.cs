@@ -3,8 +3,11 @@ using ECommerce.DTOs.Auth;
 using ECommerce.Enums;
 using ECommerce.Interfaces.IServices;
 using ECommerce.Interfaces.IUtils;
+using ECommerce.Middlewares;
+using FluentValidation;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace ECommerce.Controllers
@@ -12,7 +15,7 @@ namespace ECommerce.Controllers
     /// <summary>
     /// this login controllers
     /// </summary>
-    [ApiExplorerSettings(GroupName ="Authentication")]
+    [ApiExplorerSettings(GroupName = "Authentication")]
     [ApiVersion("1.0")]
     [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
@@ -24,14 +27,17 @@ namespace ECommerce.Controllers
         private readonly IAuthService _authService;
         private readonly ILogger<AuthController> _logger;
         private readonly IUserContextService _userContextService;
-        public AuthController(IAuthService authService,ILogger<AuthController> logger,IUserContextService userContextService) {
+        private readonly IValidator<CustomerRegistrationDto> _customerRegistrationValidator;
+        public AuthController(IAuthService authService, ILogger<AuthController> logger, IUserContextService userContextService, IValidator<CustomerRegistrationDto> customerRegistrationValidator)
+        {
             _authService = authService;
             _logger = logger;
             _userContextService = userContextService;
+            _customerRegistrationValidator = customerRegistrationValidator;
         }
         [HttpPost("login")]
         [SwaggerOperation("this end call use for the login of user")]
-        [SwaggerResponse(statusCode:StatusCodes.Status200OK,Type =typeof(ResponseBase<Object>),Description ="this end call will generate the response which contains the success message and status code")]
+        [SwaggerResponse(statusCode: StatusCodes.Status200OK, Type = typeof(ResponseBase<Object>), Description = "this end call will generate the response which contains the success message and status code")]
         public async Task<ActionResult<AuthResponseDto>> LoginAsync(LoginRequestDto loginRequest)
         {
             _logger.LogInformation("user is trying to login from {UserIP}", _userContextService.GetUserIp());
@@ -39,17 +45,23 @@ namespace ECommerce.Controllers
         }
 
         [HttpPost("register/customer")]
-        [SwaggerOperation("use this end call to register the customer")] 
-        
+        [SwaggerOperation("use this end call to register the customer")]
         public async Task<ActionResult<ResponseBase<Object>>> RegisterCustomerAsync([FromBody] CustomerRegistrationDto customerRegistrationDto)
         {
+            var result = await _customerRegistrationValidator.ValidateAsync(customerRegistrationDto);
+            if (!result.IsValid)
+            {
+                var BadRequestMessage = result.Errors.Select(e => e.ErrorMessage).ToList();
+                return BadRequest(BadRequestMessage);
+            }
             await _authService.RegisterCustomerAsync(customerRegistrationDto);
-            return Ok(new ResponseBase<Object>(200,"customer registered successsfully"));
+            return Ok(new ResponseBase<Object>(200, "customer registered successsfully"));
         }
         [HttpPost("register/staff")]
         [SwaggerOperation("use this end call to add the staff")]
         public async Task<ActionResult<ResponseBase<Object>>> RegisterStaffAsync([FromBody] StaffRegistrationDto staffRegistrationDto)
         {
+
             await _authService.RegisterStaffAsync(staffRegistrationDto);
             return Ok(new ResponseBase<Object>(200, "staff registered successfully"));
         }

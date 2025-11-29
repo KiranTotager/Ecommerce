@@ -24,6 +24,10 @@ using Microsoft.OpenApi.Models;
 using Serilog;
 using System.Text;
 using System.Text.Json.Serialization;
+using ECommerce.DTOs.Auth;
+using ECommerce.Validators;
+using FluentValidation;
+using Microsoft.AspNetCore.Mvc.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
 //serilog configuration here
@@ -39,6 +43,8 @@ builder.Services.AddControllers()
     {
         options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
     });
+//builder.Services
+//builder.Services.AddTransient<IValidator<CustomerRegistrationDto>, CustomerRegistrationDtoValidator>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(
@@ -99,7 +105,7 @@ builder.Services.AddVersionedApiExplorer(
     {
         options.GroupNameFormat = "'v'VVV";
         options.SubstituteApiVersionInUrl = true;
-    });
+    });    
 builder.Services.AddApiVersioning(options =>
 {
     options.DefaultApiVersion = new Microsoft.AspNetCore.Mvc.ApiVersion(1, 0);
@@ -148,6 +154,9 @@ builder.Services.AddScoped<IWishListService, WishListService>();
 builder.Services.AddScoped<IContactUsRepository, ContactUsRepository>();
 builder.Services.AddScoped<IContactUsService, ContactUsService>();
 builder.Services.AddScoped<ICustomerProductService, CustomerProductService>();
+
+// validators registrastration
+builder.Services.AddTransient<IValidator<CustomerRegistrationDto>, CustomerRegistrationDtoValidator>();
 builder.Services.AddAuthentication(
     options =>
     {
@@ -176,6 +185,7 @@ builder.Services.AddAuthentication(
         };
     }
     );
+
 
 builder.Services.AddAuthorization(
     options =>
