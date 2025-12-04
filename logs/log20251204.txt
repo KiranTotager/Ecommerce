@@ -1,0 +1,3 @@
+2025-12-04 23:14:32.243 +05:30 [INF] Log cleanup service is starting
+2025-12-04 23:14:32.631 +05:30 [INF] 92 log entries are deleted 
+2025-12-04 23:14:32.667 +05:30 [INF] one month old logs are deleted successfully
